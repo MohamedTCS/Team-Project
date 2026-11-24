@@ -1,0 +1,130 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background-color: #eef2f6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.portal-container {
+  align-items: center;
+  margin: 20px auto;
+    width: 380px;
+  background-color: #155bc2;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.portal-header {
+  color: white;
+  padding: 30px 20px;
+  text-align: center;
+}
+
+.portal-header h2 {
+  font-size: 22px;
+  margin-bottom: 5px;
+}
+
+.portal-header p {
+  font-size: 13px;
+  opacity: 0.9;
+}
+
+.register-card {
+  background-color: #f8fafd;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+  padding: 30px 25px;
+  text-align: center;
+}
+
+.register-card h1 {
+  color: #0b1f44;
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+
+.subtitle {
+  color: #4a5568;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.error-msg {
+  background-color: #ffe5e5;
+  color: #d93025;
+  padding: 8px;
+  border-radius: 8px;
+  font-size: 13px;
+  margin-bottom: 15px;
+}
+
+.success-msg {
+  background-color: #e6f4ea;
+  color: #1e8e3e;
+  padding: 8px;
+  border-radius: 8px;
+  font-size: 13px;
+  margin-bottom: 15px;
+}
+
+.input-group {
+  margin-bottom: 14px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  font-size: 14px;
+  background-color: white;
+  outline: none;
+}
+
+.input-group input:focus {
+  border-color: #155bc2;
+}
+
+.register-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #155bc2;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+.register-btn:hover {
+  background-color: #10499e;
+}
+
+.divider {
+  margin: 18px 0;
+  color: #718096;
+  font-size: 13px;
+}
+
+.login-link {
+  font-size: 14px;
+  color: #2d3748;
+}
+
+.login-link a {
+  color: #155bc2;
+  font-weight: bold;
+  text-decoration: none;
+}
