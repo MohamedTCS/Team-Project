@@ -1,8 +1,7 @@
-
 import './Login.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-
+import { Lock, Eye, EyeOff } from 'lucide-react';
 function Login() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
@@ -11,7 +10,6 @@ const [password, setPassword] = useState('');
 
 const [errors, setErrors] = useState({});
 const [success, setSuccess] = useState('');
-
 function handleSubmit(e) {
   e.preventDefault();
 
@@ -19,19 +17,31 @@ function handleSubmit(e) {
 
   if (!email.trim()) {
     newErrors.email = 'Email is required';
-  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    newErrors.email = 'Please enter a valid email';
   }
 
   if (!password) {
     newErrors.password = 'Password is required';
   }
 
-  setErrors(newErrors);
-
-  if (Object.keys(newErrors).length === 0) {
-    navigate('/profile');
+  if (Object.keys(newErrors).length > 0) {
+    setErrors(newErrors);
+    return;
   }
+
+  const savedUser = JSON.parse(localStorage.getItem('user') || 'null');
+
+  if (!savedUser) {
+    setErrors({ email: 'Account not found. Please register first.' });
+    return;
+  }
+
+  if (email !== savedUser.email || password !== savedUser.password) {
+    setErrors({ email: 'Invalid email or password.' });
+    return;
+  }
+
+  setErrors({});
+  navigate('/profile');
 }
   return (
     <div className="login-container">
@@ -67,23 +77,17 @@ function handleSubmit(e) {
          <p className="error-message">{errors.password}</p>
         )}
 
-          <div className="input-group">
-            
-            <span>🔒</span>
-           
-           <input
-              type={showPassword ? "text" : "password"}
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <button
-                type="button"
-                className="show-password"
-                onClick={() => setShowPassword(!showPassword)}
-              >
-                {showPassword ? "🙈" : "👁️"}
+            <div className="input-group">
+            <div className="input-wrapper">
+              <Lock size={19} />
+              <input type={showPassword ? 'text' : 'password'}
+                placeholder="Password" value={password}
+                onChange={(e) => setPassword(e.target.value)} />
+              <button type="button" className="password-toggle"
+                onClick={() => setShowPassword(!showPassword)}>
+                {showPassword ? <Eye size={19} /> : <EyeOff size={19} />}
               </button>
+            </div>
           </div>
 
           <div className="login-options">

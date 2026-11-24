@@ -1,26 +1,21 @@
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
   font-family: Arial, sans-serif;
 }
 
 body {
   background-color: #eef2f6;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
 }
 
 .portal-container {
-  align-items: center;
-  margin: 20px auto;
-    width: 380px;
+  width: 650px;
+  max-width: calc(100% - 40px);
+  margin: 40px auto;
   background-color: #155bc2;
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .portal-header {
@@ -36,52 +31,53 @@ body {
 
 .portal-header p {
   font-size: 13px;
-  opacity: 0.9;
 }
 
 .register-card {
   background-color: #f8fafd;
-  border-top-left-radius: 25px;
-  border-top-right-radius: 25px;
   padding: 30px 25px;
   text-align: center;
+  border-radius: 25px 25px 0 0;
 }
 
 .register-card h1 {
   color: #0b1f44;
   font-size: 24px;
-  margin-bottom: 5px;
 }
 
 .subtitle {
   color: #4a5568;
   font-size: 14px;
-  margin-bottom: 20px;
+  margin: 5px 0 20px;
+}
+
+.error-msg,
+.success-msg {
+  padding: 8px;
+  border-radius: 8px;
+  font-size: 13px;
+  margin-bottom: 15px;
 }
 
 .error-msg {
   background-color: #ffe5e5;
   color: #d93025;
-  padding: 8px;
-  border-radius: 8px;
-  font-size: 13px;
-  margin-bottom: 15px;
 }
 
 .success-msg {
   background-color: #e6f4ea;
   color: #1e8e3e;
-  padding: 8px;
-  border-radius: 8px;
-  font-size: 13px;
-  margin-bottom: 15px;
 }
 
 .input-group {
   margin-bottom: 14px;
+  padding: 12px;
+  border: 2px solid #d6ddec;
+  border-radius: 22px;
 }
 
-.input-group input {
+/* تنسيق حقل اختيار نوع الحساب */
+.input-group select {
   width: 100%;
   padding: 12px 15px;
   border: 1px solid #cbd5e1;
@@ -89,15 +85,53 @@ body {
   font-size: 14px;
   background-color: white;
   outline: none;
+  cursor: pointer;
 }
 
-.input-group input:focus {
+/* الإطار الخارجي لحقل الإدخال */
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 12px;
+  background: transparent;
+  border: none;
+}
+
+.input-wrapper:focus-within {
   border-color: #155bc2;
+}
+
+/* الأيقونات */
+.input-wrapper svg {
+  color: #64748b;
+  flex-shrink: 0;
+}
+
+/* الكتابة داخل الحقول */
+
+.input-wrapper input {
+  padding-right: 30px;
+}
+/* زر إظهار وإخفاء الباسورد */
+.password-toggle {
+  position: absolute;
+  left: 540px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: none;
+  color: #64748b;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 
 .register-btn {
   width: 100%;
   padding: 12px;
+  margin-top: 5px;
   background-color: #155bc2;
   color: white;
   border: none;
@@ -105,7 +139,6 @@ body {
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
-  margin-top: 5px;
 }
 
 .register-btn:hover {

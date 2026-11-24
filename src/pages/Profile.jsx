@@ -1,35 +1,50 @@
-
 import { useState, useEffect } from "react";
 import "./Profile.css";
 
 function Profile({ user }) {
+  const savedUser = JSON.parse(localStorage.getItem("user") || "null");
 
-  const student = user || {
-    name: "Ahmed Mohamed",
-    email: "ahmed@example.com",
-    studentId: "STU-2026-0001",
-    gpa: 0.0,
+  const profile = user || {
+    name: savedUser?.fullName || "User",
+    email: savedUser?.email || "",
+    studentId: "Not assigned",
+    gpa: 0,
+    role: savedUser?.role || "Student"
   };
 
-  const [email, setEmail] = useState(student.email);
+  const isAdvisor = profile.role === "Advisor";
+
+  const [email, setEmail] = useState(profile.email);
+  const [name, setName] = useState(profile.name);
+  const [savedName, setSavedName] = useState(profile.name);
+  const [savedEmail, setSavedEmail] = useState(profile.email);
   const [isEditing, setIsEditing] = useState(false);
-  const [savedEmail, setSavedEmail] = useState(student.email);
 
   useEffect(() => {
-    setEmail(student.email);
-    setSavedEmail(student.email);
-  }, [student.email]);
+    setName(profile.name);
+    setSavedName(profile.name);
+    setEmail(profile.email);
+    setSavedEmail(profile.email);
+  }, [profile.name, profile.email]);
 
   const handleSave = (e) => {
     e.preventDefault();
 
+    const updatedUser = {
+      ...savedUser,
+      fullName: name,
+      email: email
+    };
+
+    localStorage.setItem("user", JSON.stringify(updatedUser));
+
+    setSavedName(name);
     setSavedEmail(email);
     setIsEditing(false);
-
-  
   };
 
   const handleCancel = () => {
+    setName(savedName);
     setEmail(savedEmail);
     setIsEditing(false);
   };
@@ -38,49 +53,71 @@ function Profile({ user }) {
     <div className="profile-page">
       <div className="profile-container">
 
-        {/* Page Header */}
         <div className="profile-header">
           <div>
-            <h1>My Profile</h1>
-            <p>Manage your personal and academic information</p>
+            <h1>{isAdvisor ? "Advisor Profile" : "My Profile"}</h1>
+            <p>
+              {isAdvisor
+                ? "Manage your advisor account"
+                : "Manage your personal and academic information"}
+            </p>
           </div>
 
-          <span className="student-badge">Student Account</span>
+          <span className="student-badge">
+            {profile.role} Account
+          </span>
         </div>
 
-        {/* Profile Card */}
         <div className="profile-card">
 
           <div className="profile-top">
             <div className="profile-avatar">
-              {student.name.charAt(0).toUpperCase()}
+              {savedName.charAt(0).toUpperCase()}
             </div>
 
             <div className="profile-identity">
-              <h2>{student.name}</h2>
+              <h2>{savedName}</h2>
               <p>{savedEmail}</p>
-              <span>Student</span>
+              <span>{profile.role}</span>
             </div>
           </div>
 
           <div className="profile-divider"></div>
 
-          {/* Academic Overview */}
-          <h3 className="section-title">
-            Academic Overview
-          </h3>
+          {isAdvisor ? (
+            <>
+              <h3 className="section-title">
+                Advisor Overview
+              </h3>
 
-          <div className="academic-card">
-            <div>
-              <span>Current GPA</span>
-              <h2>{Number(student.gpa).toFixed(1)}</h2>
-              <p>Your current academic performance</p>
-            </div>
+              <div className="academic-card">
+                <div>
+                  <span>Account Type</span>
+                  <h2>Advisor</h2>
+                  <p>Welcome to your advisor account</p>
+                </div>
 
-            <div className="gpa-icon">GPA</div>
-          </div>
+                <div className="gpa-icon">AD</div>
+              </div>
+            </>
+          ) : (
+            <>
+              <h3 className="section-title">
+                Academic Overview
+              </h3>
 
-          {/* Personal Information */}
+              <div className="academic-card">
+                <div>
+                  <span>Current GPA</span>
+                  <h2>{Number(profile.gpa).toFixed(1)}</h2>
+                  <p>Your current academic performance</p>
+                </div>
+
+                <div className="gpa-icon">GPA</div>
+              </div>
+            </>
+          )}
+
           <div className="section-header">
             <h3 className="section-title">
               Personal Information
@@ -91,7 +128,7 @@ function Profile({ user }) {
                 className="edit-button"
                 onClick={() => setIsEditing(true)}
               >
-                Edit Email
+                Edit 
               </button>
             )}
           </div>
@@ -103,20 +140,23 @@ function Profile({ user }) {
                 <label>Full Name</label>
                 <input
                   type="text"
-                  value={student.name}
-                  disabled
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  disabled={!isEditing}
+                  required
                 />
-                <small>Name cannot be changed</small>
               </div>
 
-              <div className="field-group">
-                <label>Student ID</label>
-                <input
-                  type="text"
-                  value={student.studentId}
-                  disabled
-                />
-              </div>
+              {!isAdvisor && (
+                <div className="field-group">
+                  <label>Student ID</label>
+                  <input
+                    type="text"
+                    value={profile.studentId}
+                    disabled
+                  />
+                </div>
+              )}
 
               <div className="field-group full-width">
                 <label>Email Address</label>

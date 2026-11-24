@@ -1,9 +1,8 @@
-
 .login-container {
   width: 100%;
   max-width: 680px;
   min-height: 100vh;
-  margin: 0 auto;
+  margin: auto;
   padding: 30px 24px 50px;
   background: #edf4ff;
   font-family: Arial, sans-serif;
@@ -26,10 +25,8 @@
 }
 
 .logo h2 {
-  color: white;
   font-size: 30px;
   margin: 0 0 8px;
-  font-weight: bold;
 }
 
 .logo p {
@@ -39,19 +36,17 @@
 
 .login-card {
   position: relative;
-  background: white;
   margin-top: -35px;
   padding: 50px 45px 190px;
+  background: white;
   border-radius: 45px 45px 20px 20px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-  text-align: center;
+  box-shadow: 0 5px 20px #00000014;
 }
 
 .login-card h1 {
   color: #10265d;
   font-size: 38px;
   margin: 0 0 12px;
-  font-weight: bold;
 }
 
 .subtitle {
@@ -63,33 +58,66 @@
 .input-group {
   display: flex;
   align-items: center;
+  height: 80px;
+  padding: 0 20px;
+  margin-bottom: 25px;
   border: 2px solid #d5dbea;
   border-radius: 16px;
-  padding: 0 20px;
-  height: 80px;
-  margin-bottom: 25px;
 }
 
 .input-group span {
-  font-size: 25px;
   margin-right: 20px;
+  font-size: 25px;
 }
 
 .input-group input {
+  width: 100%;
   border: none;
   outline: none;
-  width: 100%;
-  font-size: 20px;
-  color: #263d70;
   background: transparent;
+  color: #263d70;
+  font-size: 20px;
 }
 
 .input-group input::placeholder {
   color: #7b88a8;
 }
 
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  flex: 1;
+  min-width: 0;
+  gap: 12px;
+}
+
+.input-wrapper input {
+  flex: 1;
+  min-width: 0;
+}
+
+.password-toggle {
+  position: relative !important;
+  left: 10px !important;
+  top: 5px !important;
+  margin: 0 !important;
+  transform: none !important;
+  width: 35px;
+  height: 35px;
+  border: none;
+  background: transparent;
+  color: #7b88a8;
+  cursor: pointer;
+}
+
+.password-toggle:hover {
+  color: #2165c5;
+}
+
 .error-message {
-  color: #dc2626 !important;
+  color: #dc2626;
   font-size: 15px;
   font-weight: bold;
   text-align: left;
@@ -199,18 +227,4 @@
   .login-options {
     font-size: 14px;
   }
-  .show-password {
-  border: none;
-  background: transparent;
-  color: #7b88a8;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  padding: 5px;
-}
-
-.show-password:hover {
-  color: #2165c5;
-}
-
 }
